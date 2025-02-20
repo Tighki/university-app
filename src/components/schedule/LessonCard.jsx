@@ -11,15 +11,23 @@ export const LessonCard = ({
   type,
   style,
 }) => {
+  const typeLabels = {
+    'lecture': 'Лекция',
+    'practice': 'Практика',
+    'lab': 'Лабораторная'
+  };
+
   return (
     <Card style={[styles.container, style]}>
-      <Text variant="h3" style={styles.subject}>{subject}</Text>
-      <View style={styles.details}>
-        <Text style={styles.info}>{teacher}</Text>
-        <Text style={styles.info}>Аудитория {room}</Text>
-      </View>
-      <View style={[styles.tag, styles[type]]}>
-        <Text style={styles.tagText}>{type}</Text>
+      <View style={styles.contentContainer}>
+        <Text style={styles.subject} numberOfLines={2}>{subject}</Text>
+        <View style={[styles.tag, styles[type]]}>
+          <Text style={styles.tagText}>{typeLabels[type]}</Text>
+        </View>
+        <View style={styles.details}>
+          <Text style={styles.info}>{teacher}</Text>
+          <Text style={styles.info}>Аудитория {room}</Text>
+        </View>
       </View>
     </Card>
   );
@@ -29,25 +37,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginLeft: theme.spacing.md,
+    padding: theme.spacing.md,
+  },
+  contentContainer: {
+    width: '100%',
   },
   subject: {
-    marginBottom: theme.spacing.xs,
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: theme.spacing.sm,
+    flexWrap: 'wrap',
+    color: theme.colors.text,
   },
   details: {
-    marginTop: theme.spacing.xs,
+    marginTop: theme.spacing.sm,
   },
   info: {
     color: theme.colors.textSecondary,
     fontSize: 14,
-    marginBottom: theme.spacing.xs,
+    marginBottom: 2,
   },
   tag: {
-    position: 'absolute',
-    top: theme.spacing.sm,
-    right: theme.spacing.sm,
+    alignSelf: 'flex-start',
     paddingHorizontal: theme.spacing.sm,
-    paddingVertical: theme.spacing.xs,
+    paddingVertical: 4,
     borderRadius: theme.borderRadius.small,
+    marginBottom: theme.spacing.xs,
   },
   lecture: {
     backgroundColor: '#E3F2FD',
