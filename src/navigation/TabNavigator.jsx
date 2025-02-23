@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CalendarScreen } from '../screens/CalendarScreen';
 import { ScheduleScreen } from '../screens/ScheduleScreen';
 import { NotesScreen } from '../screens/NotesScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../theme/theme';
 
@@ -49,6 +50,16 @@ export const TabNavigator = () => {
           tabBarLabel: 'Заметки',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="document-text-outline" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Profile" 
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Профиль',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" size={24} color={color} />
           ),
         }}
       />
