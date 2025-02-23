@@ -1,240 +1,68 @@
-import React, { useState, useMemo } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Animated, { FadeInUp, Layout } from 'react-native-reanimated';
 import { Text } from '../components/common/Text';
-import { Button } from '../components/common/Button';
-import { TimeSlot } from '../components/schedule/TimeSlot';
-import { AnimatedLessonCard } from '../components/schedule/AnimatedLessonCard';
-import { ScheduleFilters } from '../components/schedule/ScheduleFilters';
-import { LessonModal } from '../components/schedule/LessonModal';
 import { theme } from '../theme/theme';
+import { schedule } from '../data/schedule'; // Убедитесь, что файл существует
+import { ScheduleFilters } from '../components/schedule/ScheduleFilters';
 
-export const ScheduleScreen = () => {
+export const ScheduleScreen = ({ navigation }) => {
+  // Убираем заголовок
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
   const [selectedDay, setSelectedDay] = useState('mon');
-  const [selectedType, setSelectedType] = useState('all');
-  const [modalVisible, setModalVisible] = useState(false);
-  const [editingLesson, setEditingLesson] = useState(null);
-  const [lessons, setLessons] = useState([
-    {
-      id: '1',
-      day: 'mon',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Математический анализ',
-      teacher: 'Петров И.И.',
-      room: '301',
-      type: 'lecture',
-    },
-    {
-      id: '2',
-      day: 'mon',
-      startTime: '10:40',
-      endTime: '12:10',
-      subject: 'Программирование',
-      teacher: 'Иванов А.А.',
-      room: '215',
-      type: 'practice',
-    },
-    {
-      id: '3',
-      day: 'mon',
-      startTime: '12:20',
-      endTime: '13:50',
-      subject: 'Базы данных',
-      teacher: 'Сидорова Е.А.',
-      room: '404',
-      type: 'lecture',
-    },
-    {
-      id: '4',
-      day: 'tue',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Компьютерные сети',
-      teacher: 'Николаев Д.И.',
-      room: '318',
-      type: 'lecture',
-    },
-    {
-      id: '5',
-      day: 'tue',
-      startTime: '10:40',
-      endTime: '12:10',
-      subject: 'Операционные системы',
-      teacher: 'Морозов К.П.',
-      room: '207',
-      type: 'practice',
-    },
-    {
-      id: '6',
-      day: 'wed',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Алгоритмы и структуры данных',
-      teacher: 'Соколов П.А.',
-      room: '202',
-      type: 'lecture',
-    },
-    {
-      id: '7',
-      day: 'wed',
-      startTime: '10:40',
-      endTime: '12:10',
-      subject: 'Веб-разработка',
-      teacher: 'Козлова А.С.',
-      room: '401',
-      type: 'lab',
-    },
-    {
-      id: '8',
-      day: 'thu',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Дискретная математика',
-      teacher: 'Белов Р.С.',
-      room: '308',
-      type: 'lecture',
-    },
-    {
-      id: '9',
-      day: 'thu',
-      startTime: '10:40',
-      endTime: '12:10',
-      subject: 'Информационная безопасность',
-      teacher: 'Федоров М.Ю.',
-      room: '310',
-      type: 'practice',
-    },
-    {
-      id: '10',
-      day: 'fri',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Компьютерная графика',
-      teacher: 'Романова М.И.',
-      room: '306',
-      type: 'lecture',
-    },
-    {
-      id: '11',
-      day: 'fri',
-      startTime: '10:40',
-      endTime: '12:10',
-      subject: 'Мобильная разработка',
-      teacher: 'Григорьев А.В.',
-      room: '203',
-      type: 'lab',
-    },
-    {
-      id: '12',
-      day: 'sat',
-      startTime: '09:00',
-      endTime: '10:30',
-      subject: 'Проектирование ПО',
-      teacher: 'Кузнецов Д.А.',
-      room: '307',
-      type: 'practice',
-    }
-  ]);
+  const [selectedType, setSelectedType] = useState('all'); // Состояние для типа занятия
+  const [lessons, setLessons] = useState(schedule[selectedDay] || []);
 
-  const filteredLessons = useMemo(() => {
-    return lessons.filter(lesson => {
-      const dayMatch = lesson.day === selectedDay;
-      const typeMatch = selectedType === 'all' || lesson.type === selectedType;
-      return dayMatch && typeMatch;
-    });
-  }, [selectedDay, selectedType, lessons]);
-
-  const handleAddLesson = () => {
-    setEditingLesson(null);
-    setModalVisible(true);
+  const handleDayChange = (day) => {
+    setSelectedDay(day);
+    setLessons(schedule[day] || []);
   };
 
-  const handleEditLesson = (lesson) => {
-    setEditingLesson(lesson);
-    setModalVisible(true);
+  const handleTypeChange = (type) => {
+    setSelectedType(type);
   };
 
-  const handleSaveLesson = (lessonData) => {
-    if (editingLesson) {
-      // Редактирование существующего занятия
-      setLessons(lessons.map(lesson => 
-        lesson.id === editingLesson.id 
-          ? { ...lesson, ...lessonData, day: selectedDay }
-          : lesson
-      ));
-    } else {
-      // Добавление нового занятия
-      const newLesson = {
-        id: Date.now().toString(),
-        day: selectedDay,
-        ...lessonData,
-      };
-      setLessons([...lessons, newLesson]);
-    }
-  };
-
-  const handleDeleteLesson = (lessonId) => {
-    setLessons(lessons.filter(lesson => lesson.id !== lessonId));
-  };
+  // Фильтрация уроков по типу
+  const filteredLessons = lessons.filter((lesson) => {
+    return selectedType === 'all' || lesson.type === selectedType;
+  });
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text variant="h2">Расписание</Text>
-        <Button 
-          title="Добавить" 
-          onPress={handleAddLesson}
-          variant="primary"
-          style={styles.addButton}
-        />
-      </View>
-
-      <ScheduleFilters
-        selectedDay={selectedDay}
-        selectedType={selectedType}
-        onDayChange={setSelectedDay}
-        onTypeChange={setSelectedType}
+      <ScheduleFilters 
+        selectedDay={selectedDay} 
+        onDayChange={handleDayChange} 
+        selectedType={selectedType} // Передаем выбранный тип
+        onTypeChange={handleTypeChange} // Передаем обработчик изменения типа
       />
-
       <ScrollView style={styles.content}>
-        {filteredLessons.map((lesson, index) => (
-          <Animated.View 
-            key={lesson.id} 
-            style={styles.lessonRow}
-            entering={FadeInUp.delay(index * 100)}
-            layout={Layout.springify()}
-          >
-            <TimeSlot 
-              startTime={lesson.startTime} 
-              endTime={lesson.endTime}
-            />
-            <AnimatedLessonCard 
-              {...lesson}
-              onPress={() => handleEditLesson(lesson)}
-              onLongPress={() => handleDeleteLesson(lesson.id)}
-            />
-          </Animated.View>
-        ))}
-        {filteredLessons.length === 0 && (
-          <View style={styles.emptyState}>
-            <Text style={styles.emptyStateText}>
-              Нет занятий в этот день
-            </Text>
+        {filteredLessons.map((lesson) => (
+          <View key={lesson.id} style={styles.lessonCard}>
+            <View style={styles.timeContainer}>
+              <Text style={styles.time}>{lesson.startTime}</Text>
+              <Text style={styles.time}>{lesson.endTime}</Text>
+            </View>
+            <View style={styles.lessonInfo}>
+              <Text style={styles.subject}>{lesson.subject}</Text>
+              <View style={[
+                styles.typeTag,
+                { backgroundColor: lesson.type === 'lecture' ? '#E8F1FF' : 
+                                 lesson.type === 'practice' ? '#E8FFE8' : '#FFE8E8' }
+              ]}>
+                <Text style={styles.typeText}>
+                  {lesson.type === 'lecture' ? 'Лекция' :
+                   lesson.type === 'practice' ? 'Практика' : 'Лабораторная'}
+                </Text>
+              </View>
+              <Text style={styles.details}>{lesson.teacher}</Text>
+              <Text style={styles.details}>Аудитория {lesson.room}</Text>
+            </View>
           </View>
-        )}
+        ))}
       </ScrollView>
-
-      <LessonModal
-        visible={modalVisible}
-        onClose={() => {
-          setModalVisible(false);
-          setEditingLesson(null);
-        }}
-        onSave={handleSaveLesson}
-        initialData={editingLesson}
-      />
     </SafeAreaView>
   );
 };
@@ -242,34 +70,58 @@ export const ScheduleScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    padding: theme.spacing.md,
-    backgroundColor: theme.colors.secondary,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    ...theme.shadows.small,
-  },
-  addButton: {
-    minWidth: 100,
+    backgroundColor: '#FFFFFF',
   },
   content: {
-    flex: 1,
     padding: theme.spacing.md,
   },
-  lessonRow: {
+  lessonCard: {
     flexDirection: 'row',
+    padding: theme.spacing.md,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
     marginBottom: theme.spacing.md,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
   },
-  emptyState: {
-    flex: 1,
+  timeContainer: {
+    marginRight: theme.spacing.md,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: theme.spacing.xl,
+    width: 50,
   },
-  emptyStateText: {
-    color: theme.colors.textSecondary,
+  time: {
+    fontSize: 14,
+    color: '#666',
+  },
+  lessonInfo: {
+    flex: 1,
+  },
+  subject: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  typeTag: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    marginBottom: 4,
+  },
+  typeText: {
+    fontSize: 12,
+    color: '#666',
+  },
+  details: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 2,
   },
 }); 

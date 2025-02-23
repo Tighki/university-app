@@ -26,59 +26,52 @@ export const ScheduleFilters = ({
   onTypeChange,
 }) => {
   return (
-    <View style={styles.filtersContainer}>
+    <View style={styles.container}>
       <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false}
         style={styles.daysContainer}
-        contentContainerStyle={styles.daysContent}
       >
         {DAYS.map((day) => (
-          <Pressable
-            key={day.id}
+          <Pressable 
+            key={day.id} 
+            onPress={() => onDayChange(day.id)} 
             style={[
-              styles.dayButton,
-              selectedDay === day.id && styles.selectedDayButton
+              styles.dayButton, 
+              selectedDay === day.id && styles.selectedDay
             ]}
-            onPress={() => onDayChange(day.id)}
           >
-            <Text style={[
-              styles.dayLabel,
-              selectedDay === day.id && styles.selectedText
-            ]}>
-              {day.label}
-            </Text>
-            <Text style={[
-              styles.dateLabel,
-              selectedDay === day.id && styles.selectedText
-            ]}>
-              {day.date}
-            </Text>
+            <View>
+              <Text style={[
+                styles.dayText,
+                selectedDay === day.id && styles.selectedDayText
+              ]}>{day.label}</Text>
+              <Text style={[
+                styles.dateText,
+                selectedDay === day.id && styles.selectedDayText
+              ]}>{day.date}</Text>
+            </View>
           </Pressable>
         ))}
       </ScrollView>
-
       <ScrollView 
         horizontal 
-        showsHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false} 
         style={styles.typesContainer}
-        contentContainerStyle={styles.typesContent}
       >
         {TYPES.map((type) => (
-          <Pressable
-            key={type.id}
+          <Pressable 
+            key={type.id} 
+            onPress={() => onTypeChange(type.id)} 
             style={[
-              styles.typeButton,
-              selectedType === type.id && styles.selectedTypeButton
+              styles.typeButton, 
+              selectedType === type.id && styles.selectedType
             ]}
-            onPress={() => onTypeChange(type.id)}
           >
             <Text style={[
-              styles.typeLabel,
+              styles.typeText,
               selectedType === type.id && styles.selectedTypeText
-            ]}>
-              {type.label}
-            </Text>
+            ]}>{type.label}</Text>
           </Pressable>
         ))}
       </ScrollView>
@@ -87,76 +80,58 @@ export const ScheduleFilters = ({
 };
 
 const styles = StyleSheet.create({
-  filtersContainer: {
-    backgroundColor: '#F5F5F5',
-    paddingVertical: 12,
-    marginTop: 16,
+  container: {
+    backgroundColor: '#fff',
+    paddingTop: 8,
   },
   daysContainer: {
-    flexGrow: 0,
+    paddingHorizontal: 16,
     marginBottom: 12,
   },
-  daysContent: {
-    paddingHorizontal: theme.spacing.md,
-  },
   dayButton: {
-    width: 54,
-    height: 70,
-    marginRight: 10,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
+    width: 55,
+    height: 55,
+    borderRadius: 16,
+    backgroundColor: '#F5F5F5',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
+    marginRight: 8,
   },
-  selectedDayButton: {
-    backgroundColor: theme.colors.primary,
+  selectedDay: {
+    backgroundColor: '#4A90E2',
   },
-  dayLabel: {
-    fontSize: 15,
+  dayText: {
+    fontSize: 14,
     fontWeight: '600',
-    color: '#333333',
-    marginBottom: 4,
+    color: '#000',
+    marginBottom: 2,
   },
-  dateLabel: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#333333',
+  dateText: {
+    fontSize: 12,
+    color: '#666',
   },
-  selectedText: {
-    color: '#FFFFFF',
+  selectedDayText: {
+    color: '#FFF',
   },
   typesContainer: {
-    flexGrow: 0,
-  },
-  typesContent: {
-    paddingHorizontal: theme.spacing.md,
+    paddingHorizontal: 16,
+    marginBottom: 8,
   },
   typeButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    marginRight: 8,
     borderRadius: 20,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: theme.colors.border,
+    backgroundColor: '#F5F5F5',
+    marginRight: 8,
   },
-  selectedTypeButton: {
-    backgroundColor: theme.colors.primary,
-    borderColor: theme.colors.primary,
+  selectedType: {
+    backgroundColor: '#4A90E2',
   },
-  typeLabel: {
+  typeText: {
     fontSize: 14,
-    color: theme.colors.text,
+    color: '#000',
   },
   selectedTypeText: {
-    color: '#FFFFFF',
+    color: '#FFF',
   },
 }); 

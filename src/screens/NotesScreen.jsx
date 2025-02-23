@@ -22,10 +22,6 @@ export const NotesScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text variant="h2">Заметки</Text>
-      </View>
-
       <ScrollView style={styles.content}>
         {notes.map(note => (
           <NoteCard
@@ -60,11 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
-  },
-  header: {
-    padding: theme.spacing.md,
-    backgroundColor: theme.colors.secondary,
-    ...theme.shadows.small,
   },
   content: {
     flex: 1,
