@@ -13,6 +13,7 @@ export const AnimatedLessonCard = (props) => {
   const scale = useSharedValue(1);
   const elevation = useSharedValue(theme.shadows.small.elevation);
 
+  // Animation styles for card interaction
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: scale.value }],
     elevation: elevation.value,

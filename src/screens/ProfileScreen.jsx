@@ -14,13 +14,13 @@ const uniqueSubjects = [...new Set(
 )];
 
 const grades = {
-  average: 4.5, // Обновленный средний балл
+  average: 4.5,
   subjects: uniqueSubjects.map((subject, index) => ({
     id: (index + 1).toString(),
     name: subject,
-    grade: Math.floor(Math.random() * 2) + 4, // Случайная оценка 4 или 5
-    attendance: `${Math.floor(Math.random() * 11) + 90}%`, // Случайная посещаемость от 90% до 100%
-    status: Math.random() > 0.3 ? 'Отл.' : 'Хор.', // 70% вероятность "Отл."
+    grade: Math.floor(Math.random() * 2) + 4,
+    attendance: `${Math.floor(Math.random() * 11) + 90}%`,
+    status: Math.random() > 0.3 ? 'Отл.' : 'Хор.',
   })),
 };
 

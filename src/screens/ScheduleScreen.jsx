@@ -25,7 +25,7 @@ export const ScheduleScreen = ({ navigation }) => {
     setSelectedType(type);
   };
 
-  // Фильтрация уроков по типу
+  // Filter lessons by type
   const filteredLessons = lessons.filter((lesson) => {
     return selectedType === 'all' || lesson.type === selectedType;
   });

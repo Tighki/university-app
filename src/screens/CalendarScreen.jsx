@@ -68,7 +68,7 @@ export const CalendarScreen = () => {
     setGroupNumber('');
     setCourse('');
     
-    // Анимация галочки
+    // Animation configuration for checkmark badge
     checkmarkScale.value = withSequence(
       withSpring(1, { damping: 8 }),
       withTiming(1, { duration: 1000 })
