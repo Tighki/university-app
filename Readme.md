@@ -75,7 +75,7 @@ UniLight = Университет + Light (легкость использова
 <br/>Настройки профиля
 </td>
 <td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/notification.png"/>
+<img width="64" src="https://img.icons8.com/fluency/96/000000/appointment-reminders.png"/>
 <br/>Push-уведомления
 </td>
 </tr>
