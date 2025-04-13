@@ -1,30 +1,58 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '../components/common/Text';
 import { theme } from '../theme/theme';
 import { Ionicons } from '@expo/vector-icons';
-import { schedule } from '../data/schedule';
-
-// Получаем уникальные предметы из расписания
-const uniqueSubjects = [...new Set(
-  Object.values(schedule)
-    .flat()
-    .map(item => item.subject)
-)];
-
-const grades = {
-  average: 4.5,
-  subjects: uniqueSubjects.map((subject, index) => ({
-    id: (index + 1).toString(),
-    name: subject,
-    grade: Math.floor(Math.random() * 2) + 4,
-    attendance: `${Math.floor(Math.random() * 11) + 90}%`,
-    status: Math.random() > 0.3 ? 'Отл.' : 'Хор.',
-  })),
-};
+import { useAuth } from '../services/authContext';
+import { gradesAPI } from '../services/database';
 
 export const ProfileScreen = () => {
+  const { user } = useAuth();
+  const [grades, setGrades] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    loadGrades();
+  }, [user]);
+
+  const loadGrades = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      const gradesData = await gradesAPI.getGradesForUser(user.id);
+      setGrades(gradesData);
+    } catch (err) {
+      console.error('Error loading grades:', err);
+      setError('Ошибка загрузки оценок');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <Text style={styles.loadingText}>Загрузка данных профиля...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (!grades) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error || 'Данные не найдены'}</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.content}>
@@ -33,9 +61,9 @@ export const ProfileScreen = () => {
           <View style={styles.avatarContainer}>
             <Ionicons name="person-circle-outline" size={80} color={theme.colors.primary} />
           </View>
-          <Text style={styles.studentName}>Дизенко Марк</Text>
-          <Text style={styles.studentInfo}>Группа: 555ис</Text>
-          <Text style={styles.studentInfo}>Курс: 4</Text>
+          <Text style={styles.studentName}>{user.full_name}</Text>
+          <Text style={styles.studentInfo}>Группа: {user.group_number}</Text>
+          <Text style={styles.studentInfo}>Курс: {user.course}</Text>
         </View>
 
         {/* Средний балл */}
@@ -229,5 +257,24 @@ const styles = StyleSheet.create({
   detailValue: {
     fontSize: 16,
     fontWeight: '600',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: theme.spacing.md,
+    color: theme.colors.textSecondary,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: theme.spacing.lg,
+  },
+  errorText: {
+    color: theme.colors.error,
+    textAlign: 'center',
   },
 }); 

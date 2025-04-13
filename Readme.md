@@ -1,110 +1,57 @@
-<div align="center">
-  
 # 🎓 UniLight - Университетское приложение
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=2196F3&center=true&vCenter=true&width=435&lines=Умное+приложение+для+учебы;Удобный+доступ+к+расписанию;Цифровая+библиотека;Безопасность+и+производительность" alt="Typing SVG" />
+![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%234A80F0&center=true&vCenter=true&width=600&lines=Мобильное+приложение+для+студентов;Расписание+занятий;Оценки+и+задания;Удобный+интерфейс)
 
-<p align="center">
-<a href="https://reactnative.dev/" target="_blank">
-<img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native"/>
-</a>
-<a href="https://expo.dev/" target="_blank">
-<img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo"/>
-</a>
-<a href="https://www.javascript.com/" target="_blank">
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"/>
-</a>
-<a href="https://reactnavigation.org/" target="_blank">
-<img src="https://img.shields.io/badge/React_Navigation-6B52AE?style=for-the-badge&logo=react&logoColor=white" alt="React Navigation"/>
-</a>
-<a href="https://github.com/expo/vector-icons" target="_blank">
-<img src="https://img.shields.io/badge/Expo_Icons-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo Icons"/>
-</a>
-</p>
-
-<img src="https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake.svg" alt="snake" style="max-width: 100%;"/>
-
-</div>
+[![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![React Navigation](https://img.shields.io/badge/React_Navigation-6B52AE?style=for-the-badge&logo=react&logoColor=white)](https://reactnavigation.org/)
 
 ## 📱 О проекте
 
 **UniLight** - это современное мобильное приложение для студентов и преподавателей, разработанное с использованием React Native и Expo. Приложение предоставляет удобный доступ к университетским сервисам: расписанию занятий, учебным материалам, уведомлениям и многому другому.
 
-<div align="center">
-
-```text
+```
 UniLight = Университет + Light (легкость использования)
 ```
 
-</div>
-
 ## ✨ Ключевые возможности
 
-<div align="center">
+| ![](https://img.icons8.com/color/96/000000/calendar.png) Расписание занятий | ![](https://img.icons8.com/color/96/000000/book.png) Электронная библиотека | ![](https://img.icons8.com/color/96/000000/chat.png) Уведомления и чаты | ![](https://img.icons8.com/color/96/000000/graduation-cap.png) Учебные материалы |
+|-----------------------------------------------------------------------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| ![](https://img.icons8.com/color/96/000000/exam.png) Экзамены и тесты | ![](https://img.icons8.com/color/96/000000/classroom.png) Аудитории | ![](https://img.icons8.com/color/96/000000/settings.png) Настройки профиля | ![](https://img.icons8.com/fluency/96/000000/appointment-reminders.png) Push-уведомления |
 
-<table>
-<tr>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/calendar.png"/>
-<br/>Расписание занятий
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/book.png"/>
-<br/>Электронная библиотека
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/chat.png"/>
-<br/>Уведомления и чаты
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/graduation-cap.png"/>
-<br/>Учебные материалы
-</td>
-</tr>
-<tr>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/exam.png"/>
-<br/>Экзамены и тесты
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/classroom.png"/>
-<br/>Аудитории
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/color/96/000000/settings.png"/>
-<br/>Настройки профиля
-</td>
-<td align="center">
-<img width="64" src="https://img.icons8.com/fluency/96/000000/appointment-reminders.png"/>
-<br/>Push-уведомления
-</td>
-</tr>
-</table>
+## 🆕 Последние обновления
 
+- **Управление расписанием** - Администраторы теперь могут добавлять, удалять и редактировать расписание для студентов
+- **Улучшенный интерфейс** - Переработаны формы и стили для более удобного использования
+- **Оптимизация производительности** - Ускорена загрузка данных и отзывчивость приложения
+
+## 📸 Скриншоты приложения
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center">
+  <img src="https://github.com/Tighki/university-app/raw/main/assets/screenshots/schedule.png" width="250" alt="Расписание занятий">
+  <img src="https://github.com/Tighki/university-app/raw/main/assets/screenshots/admin.png" width="250" alt="Панель администратора">
+  <img src="https://github.com/Tighki/university-app/raw/main/assets/screenshots/login.png" width="250" alt="Экран входа">
 </div>
 
 ## 🚀 Быстрый старт
 
-<details open>
-<summary>📥 Системные требования</summary>
-
+### 📥 Системные требования 
 * Node.js 14.0 или выше
 * npm 6.0 или выше
 * Expo CLI
 * Android Studio или Xcode (для эмуляторов)
 * Или мобильное устройство с установленным приложением Expo Go
 
-</details>
-
-<details open>
-<summary>📲 Установка и запуск</summary>
+### 📲 Установка и запуск 
 
 ```bash
 # 1. Клонируем репозиторий
-git clone https://github.com/YourUsername/unilight.git
+git clone https://github.com/Tighki/university-app.git
 
 # 2. Переходим в директорию проекта
-cd unilight
+cd university-app
 
 # 3. Устанавливаем зависимости
 npm install
@@ -119,37 +66,35 @@ npx expo start
 ```
 
 Для запуска на устройстве:
-- Установите приложение Expo Go на ваше устройство
-- Отсканируйте QR-код из терминала с помощью камеры (iOS) или приложения Expo Go (Android)
+* Установите приложение Expo Go на ваше устройство
+* Отсканируйте QR-код из терминала с помощью камеры (iOS) или приложения Expo Go (Android)
 
 Для запуска на эмуляторе:
-- После запуска `npm start`, нажмите `a` для запуска на Android-эмуляторе
-- Или нажмите `i` для запуска на iOS-симуляторе
+* После запуска `npm start`, нажмите `a` для запуска на Android-эмуляторе
+* Или нажмите `i` для запуска на iOS-симуляторе
 
-</details>
-
-<details>
-<summary>🧰 Структура проекта</summary>
+### 🧰 Структура проекта 
 
 ```
-unilight/
+university-app/
 ├── assets/              # Изображения, шрифты и другие статические ресурсы
 ├── src/                 # Исходный код приложения
 │   ├── components/      # Многоразовые компоненты
+│   ├── data/            # Моковые данные
 │   ├── navigation/      # Навигационная структура (react-navigation)
 │   ├── screens/         # Экраны приложения
+│   │   ├── admin/       # Административные экраны
+│   │   ├── auth/        # Экраны авторизации
+│   │   └── student/     # Экраны для студентов
 │   ├── services/        # API и другие сервисы
-│   └── utils/           # Вспомогательные функции
+│   └── theme/           # Стили и темы
 ├── .gitignore          # Игнорируемые Git-файлы
 ├── App.js              # Корневой компонент приложения
 ├── app.json            # Конфигурация Expo
-├── babel.config.js     # Конфигурация Babel
 ├── index.js            # Точка входа
 ├── package.json        # Зависимости и скрипты NPM
 └── README.md           # Документация проекта
 ```
-
-</details>
 
 ## 🛠️ Технический стек
 
@@ -160,15 +105,14 @@ unilight/
 * **Анимации**: React Native Reanimated
 * **Безопасность**: React Native Safe Area Context
 
-## 🔄 Обновления и планы
+## 📋 Планы на будущее
 
-- [x] Основная структура приложения
-- [x] Настройка навигации
-- [ ] Разработка экрана авторизации
+- [ ] Добавление личного кабинета преподавателя
 - [ ] Интеграция с API университета
-- [ ] Реализация уведомлений
-- [ ] Оптимизация для tablets
+- [ ] Реализация уведомлений о начале занятий
 - [ ] Темная тема
+- [ ] Возможность загрузки и просмотра учебных материалов
+- [ ] Мультиязычность
 
 ## 👨‍💻 Разработка и вклад
 
@@ -181,23 +125,11 @@ unilight/
 
 ## 📞 Связь с нами
 
-<div align="center">
-
-[![Email](https://img.shields.io/badge/Email-Поддержка-blue?style=for-the-badge&logo=mail.ru)](mailto:tighki@mail.ru)
-[![Telegram](https://img.shields.io/badge/Telegram-Чат_разработчиков-blue?style=for-the-badge&logo=telegram)](https://t.me/TighkiCult)
-
-<img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" alt="Random Quote"/>
-
-</div>
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@unilight.com)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/unilight_app)
 
 ---
 
-<div align="center">
-  
 ### 🌟 Не забудьте поставить звездочку проекту!
 
-<img src="https://raw.githubusercontent.com/BrunnerLivio/brunnerlivio/master/images/marquee.svg" alt=""/>
-
-![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FYourUsername%2Funilight&label=Посетители&labelColor=%23697689&countColor=%232ccce4)
-
-</div> 
+![Visitors](https://visitor-badge.glitch.me/badge?page_id=tighki.university-app) 

@@ -1,38 +1,90 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '../components/common/Text';
 import { theme } from '../theme/theme';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity } from 'react-native';
 import { NoteModal } from '../components/notes/NoteModal';
 import { NoteCard } from '../components/notes/NoteCard';
+import { notesAPI } from '../services/database';
+import { useAuth } from '../services/authContext';
 
 export const NotesScreen = () => {
+  const { user } = useAuth();
   const [modalVisible, setModalVisible] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const handleAddNote = (note) => {
-    setNotes([...notes, { id: Date.now().toString(), ...note }]);
+  useEffect(() => {
+    if (user) {
+      loadNotes();
+    }
+  }, [user]);
+
+  const loadNotes = async () => {
+    setLoading(true);
+    try {
+      const notesData = await notesAPI.getNotesForUser(user.id);
+      setNotes(notesData);
+    } catch (err) {
+      console.error('Error loading notes:', err);
+      setError('Ошибка загрузки заметок');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDeleteNote = (id) => {
-    setNotes(notes.filter(note => note.id !== id));
+  const handleAddNote = async (note) => {
+    try {
+      const noteData = {
+        userId: user.id,
+        title: note.title,
+        content: note.content
+      };
+      await notesAPI.addNote(noteData);
+      loadNotes();
+    } catch (err) {
+      console.error('Error adding note:', err);
+    }
   };
+
+  const handleDeleteNote = async (id) => {
+    try {
+      await notesAPI.deleteNote(id);
+      loadNotes();
+    } catch (err) {
+      console.error('Error deleting note:', err);
+    }
+  };
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <Text style={styles.loadingText}>Загрузка заметок...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.content}>
-        {notes.map(note => (
-          <NoteCard
-            key={note.id}
-            title={note.title}
-            content={note.content}
-            onDelete={() => handleDeleteNote(note.id)}
-          />
-        ))}
-        {notes.length === 0 && (
-          <Text style={styles.emptyText}>У вас пока нет заметок</Text>
+        {notes.length === 0 ? (
+          <Text style={styles.emptyText}>
+            {error ? error : 'У вас пока нет заметок'}
+          </Text>
+        ) : (
+          notes.map(note => (
+            <NoteCard
+              key={note.id}
+              title={note.title}
+              content={note.content}
+              onDelete={() => handleDeleteNote(note.id)}
+            />
+          ))
         )}
       </ScrollView>
 
@@ -76,6 +128,15 @@ const styles = StyleSheet.create({
   emptyText: {
     textAlign: 'center',
     marginTop: theme.spacing.xl,
+    color: theme.colors.textSecondary,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: theme.spacing.md,
     color: theme.colors.textSecondary,
   },
 });

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '../components/common/Text';
 import { theme } from '../theme/theme';
-import { schedule } from '../data/schedule'; // Убедитесь, что файл существует
 import { ScheduleFilters } from '../components/schedule/ScheduleFilters';
+import { scheduleAPI } from '../services/database';
+import { useAuth } from '../services/authContext';
 
 export const ScheduleScreen = ({ navigation }) => {
   // Убираем заголовок
@@ -12,56 +13,103 @@ export const ScheduleScreen = ({ navigation }) => {
     navigation.setOptions({ headerShown: false });
   }, [navigation]);
 
+  const { user } = useAuth();
   const [selectedDay, setSelectedDay] = useState('mon');
-  const [selectedType, setSelectedType] = useState('all'); // Состояние для типа занятия
-  const [lessons, setLessons] = useState(schedule[selectedDay] || []);
+  const [selectedType, setSelectedType] = useState('all');
+  const [schedule, setSchedule] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    loadSchedule();
+  }, [user]);
+
+  const loadSchedule = async () => {
+    if (!user) return;
+    
+    setLoading(true);
+    try {
+      const scheduleData = await scheduleAPI.getScheduleForUser(user.id);
+      setSchedule(scheduleData);
+    } catch (err) {
+      console.error('Error loading schedule:', err);
+      setError('Ошибка загрузки расписания');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDayChange = (day) => {
     setSelectedDay(day);
-    setLessons(schedule[day] || []);
   };
 
   const handleTypeChange = (type) => {
     setSelectedType(type);
   };
 
+  // Get lessons for the selected day
+  const lessons = schedule[selectedDay] || [];
+
   // Filter lessons by type
   const filteredLessons = lessons.filter((lesson) => {
     return selectedType === 'all' || lesson.type === selectedType;
   });
+
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScheduleFilters 
+          selectedDay={selectedDay} 
+          onDayChange={handleDayChange} 
+          selectedType={selectedType}
+          onTypeChange={handleTypeChange}
+        />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+          <Text style={styles.loadingText}>Загрузка расписания...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <ScheduleFilters 
         selectedDay={selectedDay} 
         onDayChange={handleDayChange} 
-        selectedType={selectedType} // Передаем выбранный тип
-        onTypeChange={handleTypeChange} // Передаем обработчик изменения типа
+        selectedType={selectedType}
+        onTypeChange={handleTypeChange}
       />
       <ScrollView style={styles.content}>
-        {filteredLessons.map((lesson) => (
-          <View key={lesson.id} style={styles.lessonCard}>
-            <View style={styles.timeContainer}>
-              <Text style={styles.time}>{lesson.startTime}</Text>
-              <Text style={styles.time}>{lesson.endTime}</Text>
-            </View>
-            <View style={styles.lessonInfo}>
-              <Text style={styles.subject}>{lesson.subject}</Text>
-              <View style={[
-                styles.typeTag,
-                { backgroundColor: lesson.type === 'lecture' ? '#E8F1FF' : 
-                                 lesson.type === 'practice' ? '#E8FFE8' : '#FFE8E8' }
-              ]}>
-                <Text style={styles.typeText}>
-                  {lesson.type === 'lecture' ? 'Лекция' :
-                   lesson.type === 'practice' ? 'Практика' : 'Лабораторная'}
-                </Text>
+        {filteredLessons.length === 0 ? (
+          <Text style={styles.emptyText}>
+            {error ? error : 'Нет занятий на этот день'}
+          </Text>
+        ) : (
+          filteredLessons.map((lesson) => (
+            <View key={lesson.id} style={styles.lessonCard}>
+              <View style={styles.timeContainer}>
+                <Text style={styles.time}>{lesson.startTime}</Text>
+                <Text style={styles.time}>{lesson.endTime}</Text>
               </View>
-              <Text style={styles.details}>{lesson.teacher}</Text>
-              <Text style={styles.details}>Аудитория {lesson.room}</Text>
+              <View style={styles.lessonInfo}>
+                <Text style={styles.subject}>{lesson.subject}</Text>
+                <View style={[
+                  styles.typeTag,
+                  { backgroundColor: lesson.type === 'lecture' ? '#E8F1FF' : 
+                                   lesson.type === 'practice' ? '#E8FFE8' : '#FFE8E8' }
+                ]}>
+                  <Text style={styles.typeText}>
+                    {lesson.type === 'lecture' ? 'Лекция' :
+                     lesson.type === 'practice' ? 'Практика' : 'Лабораторная'}
+                  </Text>
+                </View>
+                <Text style={styles.details}>{lesson.teacher}</Text>
+                <Text style={styles.details}>Аудитория {lesson.room}</Text>
+              </View>
             </View>
-          </View>
-        ))}
+          ))
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -123,5 +171,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     marginTop: 2,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: theme.spacing.md,
+    color: theme.colors.textSecondary,
+  },
+  emptyText: {
+    textAlign: 'center',
+    marginTop: theme.spacing.xl,
+    color: theme.colors.textSecondary,
   },
 }); 

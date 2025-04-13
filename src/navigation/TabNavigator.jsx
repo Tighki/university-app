@@ -6,10 +6,14 @@ import { NotesScreen } from '../screens/NotesScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../theme/theme';
+import { TouchableOpacity } from 'react-native';
+import { useAuth } from '../services/authContext';
 
 const Tab = createBottomTabNavigator();
 
 export const TabNavigator = () => {
+  const { logout } = useAuth();
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -60,6 +64,16 @@ export const TabNavigator = () => {
           tabBarLabel: 'Профиль',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person-outline" size={24} color={color} />
+          ),
+          headerShown: true,
+          headerTitle: 'Профиль',
+          headerRight: () => (
+            <TouchableOpacity 
+              style={{ marginRight: 16 }} 
+              onPress={logout}
+            >
+              <Ionicons name="exit-outline" size={24} color={theme.colors.error} />
+            </TouchableOpacity>
           ),
         }}
       />
