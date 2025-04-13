@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/Лицензия-MIT-green?style=for-the-badge&logo=license&logoColor=white)](https://github.com/Tighki/university-app/LICENSE)
 [![Platform](https://img.shields.io/badge/Платформа-iOS%20%7C%20Android-lightgrey?style=for-the-badge&logo=react-native&logoColor=white)](https://github.com/Tighki/university-app)
   
-<img src="https://i.imgur.com/LzOt80v.gif" width="800" alt="Демо"/>
+<img src="https://user-images.githubusercontent.com/74038190/213910845-af37a709-8995-40d6-be59-724526e3c3d7.gif" width="900" alt="Мобильное приложение"/>
   
 </div>
 
@@ -166,8 +166,10 @@ university-app/
 [![Telegram](https://img.shields.io/badge/Telegram-TighkiCult-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/TighkiCult)
 [![Email](https://img.shields.io/badge/Email-tighki@mail.ru-005FF9?style=for-the-badge&logo=mail.ru&logoColor=white)](mailto:tighki@mail.ru)
 
-<img src="https://github.com/Tighki/Tighki/blob/output/github-contribution-grid-snake-dark.svg" alt="Github Snake" width="100%">
-  
+</div>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake.svg" alt="Активность GitHub" width="100%">
 </div>
 
 ## 🤝 Вклад в проект
