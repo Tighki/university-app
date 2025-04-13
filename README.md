@@ -1,18 +1,22 @@
-# UniLight - Мобильное приложение для университета
+# <div align="center">🎓 UniLight - Мобильное приложение для университета</div>
 
 <div align="center">
-
-![Version](https://img.shields.io/badge/Версия-1.0.0-blue?style=for-the-badge)
-![License](https://img.shields.io/badge/Лицензия-MIT-green?style=for-the-badge)
-![Platform](https://img.shields.io/badge/Платформа-iOS%20%7C%20Android-lightgrey?style=for-the-badge)
+  
+[![Version](https://img.shields.io/badge/Версия-1.0.0-blue?style=for-the-badge&logo=semver&logoColor=white)](https://github.com/Tighki/university-app)
+[![License](https://img.shields.io/badge/Лицензия-MIT-green?style=for-the-badge&logo=license&logoColor=white)](https://github.com/Tighki/university-app/LICENSE)
+[![Platform](https://img.shields.io/badge/Платформа-iOS%20%7C%20Android-lightgrey?style=for-the-badge&logo=react-native&logoColor=white)](https://github.com/Tighki/university-app)
+  
+<img src="https://i.imgur.com/LzOt80v.gif" width="800" alt="Демо"/>
   
 </div>
 
-## 📱 О проекте
+<p align="center">
+  <b>UniLight</b> - современное мобильное приложение для студентов и преподавателей, разработанное для упрощения учебного процесса и улучшения коммуникации внутри учебного заведения. Приложение предоставляет удобный интерфейс для доступа к расписанию занятий, управления учебными мероприятиями, создания заметок и других полезных функций.
+</p>
 
-UniLight - это мобильное приложение для студентов и преподавателей, разработанное для упрощения учебного процесса и улучшения коммуникации внутри учебного заведения. Приложение предоставляет удобный интерфейс для доступа к расписанию занятий, управления учебными мероприятиями, создания заметок и прочих функций, необходимых для комфортной учебы.
-
-## ✨ Основные возможности
+<details>
+<summary><b>✨ Основные возможности</b></summary>
+<br>
 
 - **Расписание занятий** — просмотр расписания с удобной навигацией по дням недели и учебным группам
 - **Календарь мероприятий** — отслеживание важных университетских событий с возможностью фильтрации
@@ -20,37 +24,54 @@ UniLight - это мобильное приложение для студент�
 - **Личный профиль** — управление личной информацией, настройка уведомлений и персонализация
 - **Административная панель** — для сотрудников университета с возможностью управления данными
 
+</details>
+
 ## 📸 Скриншоты
 
 <div align="center">
-  <img src="./assets/screenshots/Экран входа.jpg" width="250" alt="Экран входа" style="margin-right: 10px"/>
-  <img src="./assets/screenshots/Расписание занятий.jpg" width="250" alt="Расписание занятий" style="margin-right: 10px"/> 
-  <img src="./assets/screenshots/Панель администратора.jpg" width="250" alt="Панель администратора"/>
+  <img src="./assets/screenshots/Экран входа.jpg" width="250" alt="Экран входа" style="margin-right: 15px"/>
+  <img src="./assets/screenshots/Расписание занятий.jpg" width="250" alt="Расписание занятий" style="margin: 0 15px"/> 
+  <img src="./assets/screenshots/Панель администратора.jpg" width="250" alt="Панель администратора" style="margin-left: 15px"/>
 </div>
 
-## 🚀 Технический стек
+## 🛠️ Технический стек
 
 <div align="center">
 
-### Frontend
-  
-![React Native](https://img.shields.io/badge/React_Native-0.76.7-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![Expo](https://img.shields.io/badge/Expo-52.0.0-000020?style=for-the-badge&logo=expo&logoColor=white)
-![React Navigation](https://img.shields.io/badge/React_Navigation-6.x-6B52AE?style=for-the-badge&logo=react&logoColor=white)
-  
-### Анимации и стили
-  
-![React Native Reanimated](https://img.shields.io/badge/Reanimated-3.16.1-FF5252?style=for-the-badge&logo=react&logoColor=white)
-![Expo Vector Icons](https://img.shields.io/badge/Vector_Icons-14.0.2-6B52AE?style=for-the-badge&logo=expo&logoColor=white)
-  
-### Хранение данных
-  
-![AsyncStorage](https://img.shields.io/badge/AsyncStorage-2.1.2-0069FF?style=for-the-badge&logo=react&logoColor=white)
-![Expo Secure Store](https://img.shields.io/badge/Secure_Store-14.0.1-000020?style=for-the-badge&logo=expo&logoColor=white)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://img.shields.io/badge/React_Native-0.76.7-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/Expo-52.0.0-000020?style=for-the-badge&logo=expo&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/React_Navigation-6.x-6B52AE?style=for-the-badge&logo=react&logoColor=white"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://img.shields.io/badge/Reanimated-3.16.1-FF5252?style=for-the-badge&logo=react&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/Vector_Icons-14.0.2-6B52AE?style=for-the-badge&logo=expo&logoColor=white"/>
+    </td>
+    <td align="center">
+      <img src="https://img.shields.io/badge/Secure_Store-14.0.1-000020?style=for-the-badge&logo=expo&logoColor=white"/>
+    </td>
+  </tr>
+</table>
 
 </div>
 
 ## 💻 Установка и запуск
+
+<div align="center">
+  
+<img src="https://user-images.githubusercontent.com/74038190/212750155-3ceddfbd-19d3-40a3-87af-8d329c8323c4.gif" width="500">
+  
+</div>
 
 ```bash
 # Клонирование репозитория
@@ -68,13 +89,11 @@ npm run android
 
 # Запуск на iOS
 npm run ios
-
-# Запуск в веб-браузере
-npm run web
 ```
 
-### Требования
-
+<details>
+<summary><b>📋 Требования для разработки</b></summary>
+<br>
 <div align="center">
   
 ![Node.js](https://img.shields.io/badge/Node.js-16.x_или_выше-339933?style=flat-square&logo=node.js&logoColor=white)
@@ -84,8 +103,11 @@ npm run web
 ![iOS](https://img.shields.io/badge/Xcode-Для_iOS-1575F9?style=flat-square&logo=xcode&logoColor=white)
   
 </div>
+</details>
 
-## 🏗️ Структура проекта
+<details>
+<summary><b>🏗️ Структура проекта</b></summary>
+<br>
 
 ```
 university-app/
@@ -104,25 +126,30 @@ university-app/
 ├── app.json            # Конфигурация Expo
 └── package.json        # Зависимости проекта
 ```
+</details>
 
 ## 🔧 Основные компоненты приложения
 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><img src="https://img.shields.io/badge/🔐-333333?style=for-the-badge"/><br/>Аутентификация</td>
-      <td align="center"><img src="https://img.shields.io/badge/🧭-333333?style=for-the-badge"/><br/>Навигация</td>
-      <td align="center"><img src="https://img.shields.io/badge/📅-333333?style=for-the-badge"/><br/>Расписание</td>
+      <td align="center"><img src="https://img.shields.io/badge/🔐-Аутентификация-5C5C5C?style=for-the-badge"/></td>
+      <td align="center"><img src="https://img.shields.io/badge/🧭-Навигация-5C5C5C?style=for-the-badge"/></td>
+      <td align="center"><img src="https://img.shields.io/badge/📅-Расписание-5C5C5C?style=for-the-badge"/></td>
     </tr>
     <tr>
-      <td align="center"><img src="https://img.shields.io/badge/🔔-333333?style=for-the-badge"/><br/>Уведомления</td>
-      <td align="center"><img src="https://img.shields.io/badge/💾-333333?style=for-the-badge"/><br/>Хранилище</td>
-      <td align="center"><img src="https://img.shields.io/badge/📊-333333?style=for-the-badge"/><br/>Администрирование</td>
+      <td align="center"><img src="https://img.shields.io/badge/🔔-Уведомления-5C5C5C?style=for-the-badge"/></td>
+      <td align="center"><img src="https://img.shields.io/badge/💾-Хранилище-5C5C5C?style=for-the-badge"/></td>
+      <td align="center"><img src="https://img.shields.io/badge/📊-Администрирование-5C5C5C?style=for-the-badge"/></td>
     </tr>
   </table>
 </div>
 
-## 🔜 Планы по развитию
+## 🔜 Дорожная карта развития
+
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/216120981-b9507c36-0e04-4469-8e27-c99271b45ba5.png" width="500" alt="Дорожная карта">
+</div>
 
 - [ ] Интеграция с университетской системой управления обучением
 - [ ] Мессенджер для общения между студентами и преподавателями
@@ -131,27 +158,7 @@ university-app/
 - [ ] Электронные зачетные книжки и ведомости
 - [ ] Поддержка офлайн-режима работы с полной синхронизацией
 
-## 🤝 Вклад в проект
-
-Мы приветствуем вклад в развитие проекта! Если вы хотите внести свой вклад:
-
-1. Форкните репозиторий
-2. Создайте ветку для вашей функции (`git checkout -b feature/amazing-feature`)
-3. Закоммитьте ваши изменения (`git commit -m 'Add some amazing feature'`)
-4. Отправьте изменения в ваш форк (`git push origin feature/amazing-feature`)
-5. Откройте Pull Request
-
-## 📝 Лицензия
-
-<div align="center">
-  
-![MIT License](https://img.shields.io/badge/Лицензия-MIT-yellow?style=for-the-badge)
-  
-</div>
-
-Проект распространяется под лицензией MIT. Смотрите файл LICENSE для получения дополнительной информации.
-
-## 👨‍💻 Авторы и контакты
+## 👨‍💻 Автор проекта
 
 <div align="center">
   
@@ -159,14 +166,42 @@ university-app/
 [![Telegram](https://img.shields.io/badge/Telegram-TighkiCult-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/TighkiCult)
 [![Email](https://img.shields.io/badge/Email-tighki@mail.ru-005FF9?style=for-the-badge&logo=mail.ru&logoColor=white)](mailto:tighki@mail.ru)
 
+<img src="https://github.com/Tighki/Tighki/blob/output/github-contribution-grid-snake-dark.svg" alt="Github Snake" width="100%">
+  
 </div>
+
+## 🤝 Вклад в проект
+
+<div align="center">
+  <a href="https://github.com/Tighki/university-app/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=Tighki/university-app" alt="Контрибьюторы" />
+  </a>
+</div>
+
+<p align="center">
+  Мы приветствуем вклад в развитие проекта! Если вы хотите внести свой вклад, ознакомьтесь с нашими <a href="https://github.com/Tighki/university-app/blob/main/CONTRIBUTING.md">рекомендациями для контрибьюторов</a>.
+</p>
+
+## 📝 Лицензия
+
+<div align="center">
+  
+[![MIT License](https://img.shields.io/badge/Лицензия-MIT-yellow?style=for-the-badge)](https://github.com/Tighki/university-app/LICENSE)
+  
+</div>
+
+<p align="center">
+  Проект распространяется под лицензией MIT. Смотрите файл LICENSE для получения дополнительной информации.
+</p>
 
 ---
 
 <div align="center">
   
 **UniLight — сделаем учебу проще и удобнее! 📚✨**
-
-![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Tighki.university-app)
+  
+<a href="https://github.com/Tighki/university-app">
+  <img src="https://komarev.com/ghpvc/?username=Tighki&repo=university-app&style=for-the-badge&color=blueviolet" alt="Счетчик просмотров" />
+</a>
   
 </div>
