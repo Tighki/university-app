@@ -29,9 +29,9 @@ UniLight = Университет + Light (легкость использова
 
 ## 📸 Скриншоты приложения
 
-![Расписание занятий](https://github.com/Tighki/university-app/raw/main/assets/screenshots/schedule.png)
-![Панель администратора](https://github.com/Tighki/university-app/raw/main/assets/screenshots/admin.png)
-![Экран входа](https://github.com/Tighki/university-app/raw/main/assets/screenshots/login.png)
+![Расписание занятий](https://github.com/Tighki/university-app/raw/main/assets/screenshots/Расписание%20занятий.jpg)
+![Панель администратора](https://github.com/Tighki/university-app/raw/main/assets/screenshots/Панель%20администратора.jpg)
+![Экран входа](https://github.com/Tighki/university-app/raw/main/assets/screenshots/Экран%20входа.jpg)
 
 ## 🚀 Быстрый старт
 
@@ -126,8 +126,8 @@ university-app/
 
 ## 📞 Связь с нами
 
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:contact@unilight.com)
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/unilight_app)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tighki@mail.ru)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/TighkiCult)
 
 ---
 
