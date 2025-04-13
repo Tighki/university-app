@@ -1,5 +1,13 @@
 # UniLight - Мобильное приложение для университета
 
+<div align="center">
+
+![Version](https://img.shields.io/badge/Версия-1.0.0-blue?style=for-the-badge)
+![License](https://img.shields.io/badge/Лицензия-MIT-green?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Платформа-iOS%20%7C%20Android-lightgrey?style=for-the-badge)
+  
+</div>
+
 ## 📱 О проекте
 
 UniLight - это мобильное приложение для студентов и преподавателей, разработанное для упрощения учебного процесса и улучшения коммуникации внутри учебного заведения. Приложение предоставляет удобный интерфейс для доступа к расписанию занятий, управления учебными мероприятиями, создания заметок и прочих функций, необходимых для комфортной учебы.
@@ -22,20 +30,25 @@ UniLight - это мобильное приложение для студент�
 
 ## 🚀 Технический стек
 
-- **Frontend:**
-  - React Native / Expo
-  - React Navigation для маршрутизации
-  - React Native Reanimated для анимаций
-  - Expo Vector Icons для иконок
+<div align="center">
 
-- **Хранение данных:**
-  - AsyncStorage для локального хранения
-  - Expo Secure Store для безопасного хранения учетных данных
+### Frontend
+  
+![React Native](https://img.shields.io/badge/React_Native-0.76.7-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Expo](https://img.shields.io/badge/Expo-52.0.0-000020?style=for-the-badge&logo=expo&logoColor=white)
+![React Navigation](https://img.shields.io/badge/React_Navigation-6.x-6B52AE?style=for-the-badge&logo=react&logoColor=white)
+  
+### Анимации и стили
+  
+![React Native Reanimated](https://img.shields.io/badge/Reanimated-3.16.1-FF5252?style=for-the-badge&logo=react&logoColor=white)
+![Expo Vector Icons](https://img.shields.io/badge/Vector_Icons-14.0.2-6B52AE?style=for-the-badge&logo=expo&logoColor=white)
+  
+### Хранение данных
+  
+![AsyncStorage](https://img.shields.io/badge/AsyncStorage-2.1.2-0069FF?style=for-the-badge&logo=react&logoColor=white)
+![Expo Secure Store](https://img.shields.io/badge/Secure_Store-14.0.1-000020?style=for-the-badge&logo=expo&logoColor=white)
 
-- **UI/UX:**
-  - Адаптивный дизайн для различных размеров экрана
-  - Поддержка светлой и темной темы
-  - Анимированные переходы между экранами
+</div>
 
 ## 💻 Установка и запуск
 
@@ -62,10 +75,15 @@ npm run web
 
 ### Требования
 
-- Node.js 16.x или выше
-- npm 8.x или выше
-- Expo CLI
-- Android Studio (для Android) или Xcode (для iOS)
+<div align="center">
+  
+![Node.js](https://img.shields.io/badge/Node.js-16.x_или_выше-339933?style=flat-square&logo=node.js&logoColor=white)
+![npm](https://img.shields.io/badge/npm-8.x_или_выше-CB3837?style=flat-square&logo=npm&logoColor=white)
+![Expo CLI](https://img.shields.io/badge/Expo_CLI-Последняя_версия-000020?style=flat-square&logo=expo&logoColor=white)
+![Android](https://img.shields.io/badge/Android_Studio-Для_Android-3DDC84?style=flat-square&logo=android-studio&logoColor=white)
+![iOS](https://img.shields.io/badge/Xcode-Для_iOS-1575F9?style=flat-square&logo=xcode&logoColor=white)
+  
+</div>
 
 ## 🏗️ Структура проекта
 
@@ -89,11 +107,20 @@ university-app/
 
 ## 🔧 Основные компоненты приложения
 
-- **Аутентификация** — защищенная система входа для студентов и преподавателей
-- **Навигационная система** — интуитивно понятное перемещение между разделами приложения
-- **Компоненты расписания** — интерактивное представление расписания занятий
-- **Система уведомлений** — оповещения о важных событиях и изменениях в расписании
-- **Хранилище данных** — локальное хранение информации с синхронизацией с сервером
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><img src="https://img.shields.io/badge/🔐-333333?style=for-the-badge"/><br/>Аутентификация</td>
+      <td align="center"><img src="https://img.shields.io/badge/🧭-333333?style=for-the-badge"/><br/>Навигация</td>
+      <td align="center"><img src="https://img.shields.io/badge/📅-333333?style=for-the-badge"/><br/>Расписание</td>
+    </tr>
+    <tr>
+      <td align="center"><img src="https://img.shields.io/badge/🔔-333333?style=for-the-badge"/><br/>Уведомления</td>
+      <td align="center"><img src="https://img.shields.io/badge/💾-333333?style=for-the-badge"/><br/>Хранилище</td>
+      <td align="center"><img src="https://img.shields.io/badge/📊-333333?style=for-the-badge"/><br/>Администрирование</td>
+    </tr>
+  </table>
+</div>
 
 ## 🔜 Планы по развитию
 
@@ -116,6 +143,12 @@ university-app/
 
 ## 📝 Лицензия
 
+<div align="center">
+  
+![MIT License](https://img.shields.io/badge/Лицензия-MIT-yellow?style=for-the-badge)
+  
+</div>
+
 Проект распространяется под лицензией MIT. Смотрите файл LICENSE для получения дополнительной информации.
 
 ## 👨‍💻 Авторы и контакты
@@ -128,8 +161,12 @@ university-app/
 
 </div>
 
-[Tighki](https://github.com/Tighki) - Идея и разработка
-
 ---
 
-**UniLight** — сделаем учебу проще и удобнее! 📚✨
+<div align="center">
+  
+**UniLight — сделаем учебу проще и удобнее! 📚✨**
+
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Tighki.university-app)
+  
+</div>
