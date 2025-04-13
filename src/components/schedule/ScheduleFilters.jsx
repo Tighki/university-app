@@ -12,6 +12,28 @@ const DAYS = [
   { id: 'sat', label: 'СБ', fullName: 'Суббота', date: '30' },
 ];
 
+// Соответствие между английскими и русскими идентификаторами дней недели
+const dayIdMapping = {
+  'mon': 'пн',
+  'tue': 'вт',
+  'wed': 'ср',
+  'thu': 'чт',
+  'fri': 'пт',
+  'sat': 'сб',
+  'sun': 'вс'
+};
+
+// Обратное соответствие
+const reverseIdMapping = {
+  'пн': 'mon',
+  'вт': 'tue',
+  'ср': 'wed',
+  'чт': 'thu',
+  'пт': 'fri', 
+  'сб': 'sat',
+  'вс': 'sun'
+};
+
 const TYPES = [
   { id: 'all', label: 'Все' },
   { id: 'lecture', label: 'Лекции' },
@@ -25,6 +47,11 @@ export const ScheduleFilters = ({
   onDayChange,
   onTypeChange,
 }) => {
+  // Находим английский идентификатор для русского дня
+  const getEnglishDayId = (russianDayId) => {
+    return reverseIdMapping[russianDayId] || russianDayId;
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView 
@@ -32,27 +59,32 @@ export const ScheduleFilters = ({
         showsHorizontalScrollIndicator={false}
         style={styles.daysContainer}
       >
-        {DAYS.map((day) => (
-          <Pressable 
-            key={day.id} 
-            onPress={() => onDayChange(day.id)} 
-            style={[
-              styles.dayButton, 
-              selectedDay === day.id && styles.selectedDay
-            ]}
-          >
-            <View>
-              <Text style={[
-                styles.dayText,
-                selectedDay === day.id && styles.selectedDayText
-              ]}>{day.label}</Text>
-              <Text style={[
-                styles.dateText,
-                selectedDay === day.id && styles.selectedDayText
-              ]}>{day.date}</Text>
-            </View>
-          </Pressable>
-        ))}
+        {DAYS.map((day) => {
+          // Проверяем соответствие с учётом языковых версий
+          const isSelected = selectedDay === day.id || selectedDay === dayIdMapping[day.id];
+          
+          return (
+            <Pressable 
+              key={day.id} 
+              onPress={() => onDayChange(day.id)} 
+              style={[
+                styles.dayButton, 
+                isSelected && styles.selectedDay
+              ]}
+            >
+              <View>
+                <Text style={[
+                  styles.dayText,
+                  isSelected && styles.selectedDayText
+                ]}>{day.label}</Text>
+                <Text style={[
+                  styles.dateText,
+                  isSelected && styles.selectedDayText
+                ]}>{day.date}</Text>
+              </View>
+            </Pressable>
+          );
+        })}
       </ScrollView>
       <ScrollView 
         horizontal 

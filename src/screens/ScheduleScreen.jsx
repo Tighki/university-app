@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text } from '../components/common/Text';
 import { theme } from '../theme/theme';
 import { ScheduleFilters } from '../components/schedule/ScheduleFilters';
 import { scheduleAPI } from '../services/database';
 import { useAuth } from '../services/authContext';
+import { Ionicons } from '@expo/vector-icons';
 
 export const ScheduleScreen = ({ navigation }) => {
   // Убираем заголовок
@@ -14,11 +15,36 @@ export const ScheduleScreen = ({ navigation }) => {
   }, [navigation]);
 
   const { user } = useAuth();
-  const [selectedDay, setSelectedDay] = useState('mon');
+  const [selectedDay, setSelectedDay] = useState('пн');
   const [selectedType, setSelectedType] = useState('all');
   const [schedule, setSchedule] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Соответствие между английскими и русскими идентификаторами дней недели
+  const dayIdMapping = {
+    'mon': 'пн',
+    'tue': 'вт',
+    'wed': 'ср',
+    'thu': 'чт',
+    'fri': 'пт',
+    'sat': 'сб',
+    'sun': 'вс'
+  };
+
+  // Соответствие между русскими и английскими типами занятий
+  const typeMapping = {
+    'лекция': 'lecture',
+    'практика': 'practice',
+    'лабораторная': 'lab'
+  };
+  
+  // Обратное соответствие
+  const reverseTypeMapping = {
+    'lecture': 'лекция',
+    'practice': 'практика',
+    'lab': 'лабораторная'
+  };
 
   useEffect(() => {
     loadSchedule();
@@ -30,7 +56,20 @@ export const ScheduleScreen = ({ navigation }) => {
     setLoading(true);
     try {
       const scheduleData = await scheduleAPI.getScheduleForUser(user.id);
+      console.log('Полученное расписание:', JSON.stringify(scheduleData));
       setSchedule(scheduleData);
+      
+      // Отладка: выводим данные по дням
+      for (const day in scheduleData) {
+        if (scheduleData[day] && scheduleData[day].length > 0) {
+          console.log(`День ${day}: ${scheduleData[day].length} занятий`);
+          scheduleData[day].forEach(lesson => {
+            console.log(`- ${lesson.subject} (${lesson.type})`);
+          });
+        } else {
+          console.log(`День ${day}: нет занятий`);
+        }
+      }
     } catch (err) {
       console.error('Error loading schedule:', err);
       setError('Ошибка загрузки расписания');
@@ -40,7 +79,8 @@ export const ScheduleScreen = ({ navigation }) => {
   };
 
   const handleDayChange = (day) => {
-    setSelectedDay(day);
+    // Преобразуем английский ID дня в русский
+    setSelectedDay(dayIdMapping[day] || day);
   };
 
   const handleTypeChange = (type) => {
@@ -52,7 +92,13 @@ export const ScheduleScreen = ({ navigation }) => {
 
   // Filter lessons by type
   const filteredLessons = lessons.filter((lesson) => {
-    return selectedType === 'all' || lesson.type === selectedType;
+    if (selectedType === 'all') return true;
+    
+    // Проверяем соответствие типа на обоих языках
+    const lessonType = lesson.type;
+    return lessonType === selectedType || 
+           typeMapping[lessonType] === selectedType ||
+           reverseTypeMapping[selectedType] === lessonType;
   });
 
   if (loading) {
@@ -80,11 +126,33 @@ export const ScheduleScreen = ({ navigation }) => {
         selectedType={selectedType}
         onTypeChange={handleTypeChange}
       />
+      <View style={styles.headerContainer}>
+        <Text style={styles.dayTitle}>
+          {DAYS.find(d => dayIdMapping[d.id] === selectedDay || d.id === selectedDay)?.fullName || 'Расписание'}
+        </Text>
+        <TouchableOpacity 
+          style={styles.refreshButton} 
+          onPress={loadSchedule}
+          disabled={loading}
+        >
+          <Ionicons name="refresh" size={22} color={theme.colors.primary} />
+        </TouchableOpacity>
+      </View>
       <ScrollView style={styles.content}>
         {filteredLessons.length === 0 ? (
-          <Text style={styles.emptyText}>
-            {error ? error : 'Нет занятий на этот день'}
-          </Text>
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>
+              {error ? error : 'Нет занятий на этот день'}
+            </Text>
+            {!loading && (
+              <TouchableOpacity 
+                style={styles.retryButton}
+                onPress={loadSchedule}
+              >
+                <Text style={styles.retryButtonText}>Обновить</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         ) : (
           filteredLessons.map((lesson) => (
             <View key={lesson.id} style={styles.lessonCard}>
@@ -96,12 +164,17 @@ export const ScheduleScreen = ({ navigation }) => {
                 <Text style={styles.subject}>{lesson.subject}</Text>
                 <View style={[
                   styles.typeTag,
-                  { backgroundColor: lesson.type === 'lecture' ? '#E8F1FF' : 
-                                   lesson.type === 'practice' ? '#E8FFE8' : '#FFE8E8' }
+                  { backgroundColor: 
+                    lesson.type === 'lecture' || lesson.type === 'лекция' ? '#E8F1FF' : 
+                    lesson.type === 'practice' || lesson.type === 'практика' ? '#E8FFE8' : 
+                    lesson.type === 'lab' || lesson.type === 'лабораторная' ? '#FFE8E8' : '#F5F5F5'
+                  }
                 ]}>
                   <Text style={styles.typeText}>
-                    {lesson.type === 'lecture' ? 'Лекция' :
-                     lesson.type === 'practice' ? 'Практика' : 'Лабораторная'}
+                    {lesson.type === 'lecture' || lesson.type === 'лекция' ? 'Лекция' :
+                     lesson.type === 'practice' || lesson.type === 'практика' ? 'Практика' : 
+                     lesson.type === 'lab' || lesson.type === 'лабораторная' ? 'Лабораторная' : 
+                     lesson.type}
                   </Text>
                 </View>
                 <Text style={styles.details}>{lesson.teacher}</Text>
@@ -114,6 +187,16 @@ export const ScheduleScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+
+// Массив с днями недели для отображения названия дня
+const DAYS = [
+  { id: 'mon', label: 'ПН', fullName: 'Понедельник', date: '25' },
+  { id: 'tue', label: 'ВТ', fullName: 'Вторник', date: '26' },
+  { id: 'wed', label: 'СР', fullName: 'Среда', date: '27' },
+  { id: 'thu', label: 'ЧТ', fullName: 'Четверг', date: '28' },
+  { id: 'fri', label: 'ПТ', fullName: 'Пятница', date: '29' },
+  { id: 'sat', label: 'СБ', fullName: 'Суббота', date: '30' },
+];
 
 const styles = StyleSheet.create({
   container: {
@@ -185,5 +268,38 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: theme.spacing.xl,
     color: theme.colors.textSecondary,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EFEFEF',
+  },
+  dayTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: theme.colors.textPrimary,
+  },
+  refreshButton: {
+    padding: 8,
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+  retryButton: {
+    marginTop: 16,
+    backgroundColor: theme.colors.primary,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
   },
 }); 

@@ -459,9 +459,36 @@ export const scheduleAPI = {
         console.log(`Загрузка расписания для пользователя ID: ${userId}`);
         console.log(`Всего занятий в системе: ${mockStorage.schedule.length}`);
         
-        // Фильтруем занятия по ID пользователя
-        const userLessons = mockStorage.schedule.filter(lesson => lesson.user_id === parseInt(userId));
-        console.log(`Найдено занятий для пользователя: ${userLessons.length}`);
+        // Проверяем, есть ли расписание в системе
+        if (mockStorage.schedule.length === 0) {
+          console.error('Расписание не инициализировано');
+          
+          // Если расписания нет, явно загружаем его из mockSchedule
+          Object.keys(mockSchedule).forEach(day => {
+            mockSchedule[day].forEach((lesson, index) => {
+              mockStorage.schedule.push({
+                id: 100 + index, // Уникальные ID для каждого занятия
+                user_id: 1, // ID студента
+                day,
+                subject: lesson.subject,
+                teacher: lesson.teacher,
+                room: lesson.room,
+                type: lesson.type,
+                start_time: lesson.startTime,
+                end_time: lesson.endTime
+              });
+            });
+          });
+          console.log(`Расписание инициализировано заново. Теперь в нём занятий: ${mockStorage.schedule.length}`);
+        }
+        
+        // Фильтруем занятия по ID пользователя (корректируем сравнение)
+        const userIdNum = parseInt(userId);
+        const userLessons = mockStorage.schedule.filter(lesson => {
+          return lesson.user_id === userIdNum || lesson.user_id === userId;
+        });
+        
+        console.log(`Найдено занятий для пользователя ${userId}: ${userLessons.length}`);
         
         const schedule = {};
         // Инициализируем дни недели пустыми массивами - используем русские сокращения
@@ -474,8 +501,8 @@ export const scheduleAPI = {
           // Преобразуем день недели в русский формат
           const rusDay = dayReverseTranslations[item.day] || item.day;
           
-          // Преобразуем тип занятия в русский формат
-          const rusType = typeReverseTranslations[item.type] || item.type;
+          // Преобразуем тип занятия в english формат для совместимости
+          const lessonType = item.type;
           
           if (schedule[rusDay]) {
             schedule[rusDay].push({
@@ -483,7 +510,7 @@ export const scheduleAPI = {
               subject: item.subject,
               teacher: item.teacher,
               room: item.room,
-              type: rusType,
+              type: lessonType,
               startTime: item.start_time,
               endTime: item.end_time
             });
@@ -507,6 +534,8 @@ export const scheduleAPI = {
         const engDay = dayTranslations[lesson.day] || lesson.day;
         const engType = typeTranslations[lesson.type] || lesson.type;
         
+        console.log(`Добавление занятия: день=${engDay}, тип=${engType}`);
+        
         const lessonId = mockStorage.schedule.length + 100;
         
         // Добавляем занятие в mockStorage
@@ -517,7 +546,7 @@ export const scheduleAPI = {
           subject: lesson.subject,
           teacher: lesson.teacher,
           room: lesson.room,
-          type: engType,
+          type: engType,  // Используем английский тип
           start_time: lesson.startTime,
           end_time: lesson.endTime
         });
